@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment-devops
+  namespace: haproxy-controller-devops
+  labels:
+    run: ingress-default-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: beingress-default-backend
+  template:
+    metadata:
+      labels:
+        run: beingress-default-backend
+    spec:
+      containers:
+      - name: backend-container-devops
+        image: gcr.io/google_containers/defaultbackend:1.0
+        resources:
+          requests:
+            memory: "1G"
+            cpu: "0.5" 
+          limits:
+            memory: "2G"
+            cpu: "1.0"
+        ports:
+        - containerPort: 8080

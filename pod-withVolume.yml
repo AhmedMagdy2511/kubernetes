@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  labels:
+    app: myapp
+spec:
+  containers:
+  - name: myapp
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+    - mountPath: /var/log/nginx
+      name: myapp-vol
+  volumes:
+  - name: myapp-vol
+    persistentVolumeClaim:
+      claimName: claim-log-1

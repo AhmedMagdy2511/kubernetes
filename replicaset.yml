@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replica-set-1
+  labels:
+    app: replicaset1
+spec:
+  # modify replicas according to your case
+  replicas: 5
+  selector:
+    matchLabels:
+      app: replicaset1
+  template:
+    metadata:
+      name: busybox-bod
+      labels:
+        app: replicaset1
+    spec:
+      containers:
+      - name: busybox-container
+        image: busybox
+        command: ["sleep"]
+        args: ["1000"]
+# apiVersion: apps/v1
+# kind: ReplicaSet
+# metadata:
+#   name: replica-set-1
+#   labels:
+#     app: replicaset1
+# spec:
+#   template:
+#     metadata:
+#       name: busybox-bod
+#       labels:
+#         app: replicaset1
+#       spec:
+#         containers:
+#         - name: busybox-container
+#           image: busybox
+#           command: ["sleep"]
+#           args: ["1000"]
+#   replicas: 3
+#   selector:
+#     matchLabels:
+#       app: replicaset1
+
+# spec:
+#   template:
+#     metadata:
+#       name: replica-set-1
+#       labels:
+#         app: replica-set-1
+#         type: front-end
+#       spec:
+#         containers:
+#         - name: nginx-container
+#           image: nginx
+#   replicas: 3
+#   selector:
+#     matchlabels:
+#       type: front-end

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beta
+  namespace: finance
+  labels:
+    app: namespace-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: namespace-app
+  template:
+    metadata:
+      labels:
+        app: namespace-app
+    spec:
+      containers:
+      - name: beta-container
+        image: redis
+        resources:
+          requests:
+            memory: "1G"
+            cpu: "0.5" 
+          limits:
+            memory: "2G"
+            cpu: "1.0"
+        ports:
+        - containerPort: 9090
